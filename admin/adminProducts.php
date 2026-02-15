@@ -49,7 +49,7 @@ $products = $stmt->fetchAll();
 
     <div class="container">
         <div style="width: 95%; margin: 0 auto; text-align: right;">
-            <a href="admin_add.php" class="btn-add"><i class="fas fa-plus"></i> NOUVEAU POKÉMON</a>
+            <a href="admin_add.php" class="btn-add"><i class="fas fa-plus"></i> NOUVEAU PRODUIT</a>
         </div>
 
         <table class="admin-table">

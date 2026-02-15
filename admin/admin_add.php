@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un Pokémon - Admin</title>
+    <title>Ajouter un produit - Admin</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body style="background: #222; color: white; font-family: sans-serif;">
@@ -46,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <hr>
     
     <form method="POST" enctype="multipart/form-data">
-        <label>Nom du Pokémon :</label><br>
+        <label>Nom du produit :</label><br>
         <input type="text" name="nom" placeholder="Pikachu" required style="width:100%; margin-bottom:15px; padding: 8px;">
 
         <label>Description :</label><br>
         <textarea name="description" rows="4" placeholder="Description du produit..." style="width:100%; margin-bottom:15px; padding: 8px;"></textarea>
 
-        <label>Prix (en PDN) :</label><br>
+        <label>Prix :</label><br>
         <input type="number" step="0.01" name="prix" placeholder="0.00" required style="width:100%; margin-bottom:15px; padding: 8px;">
 
         <label>Stock initial :</label><br>

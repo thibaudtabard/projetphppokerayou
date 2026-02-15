@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_nom'] = $user['nom'];
         $_SESSION['user_role'] = $user['role']; // Utile pour le back-office
         
-        header('Location: index.php'); // Redirection vers l'accueil (à changer peut-etre)
+        header('Location: index.php'); // Redirection vers l'accueil
         exit();
     } else {
         $erreur = "Identifiants incorrects.";
