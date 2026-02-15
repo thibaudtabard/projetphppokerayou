@@ -2,6 +2,7 @@
 session_start();
 include 'includes/products.php';
 
+
 if(isset($_GET['remove'])) {
     $id = $_GET['remove'];
     if(isset($_SESSION['cart'][$id])) {

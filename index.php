@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
                     
                     <div class="auth-links" style="margin-top: 20px;">
                         <?php if($_SESSION['user_role'] === 'admin'): ?>
-                            <a href="admin/admin_products.php" style="color: #ffcb05;"><i class="fas fa-tools"></i> Accès Admin</a> |
+                            <a href="admin/adminProducts.php" style="color: #ffcb05;"><i class="fas fa-tools"></i> Accès Admin</a> |
                         <?php endif; ?>
                         <a href="deconnexion.php" style="color: #ff4444;"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
                     </div>
@@ -101,6 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
                     <a href="inscription.php">Nouvel arrivant ? Créer un profil</a>
                 </div>
             <?php endif; ?>
+            <?php if(isset($_GET['error']) && $_GET['error'] == 'auth'): ?>
+    <p style="color: #ff4444; text-align: center; font-weight: bold;">
+        Veuillez vous connecter pour accéder à votre inventaire.
+    </p>
+<?php endif; ?>
         </div>
 
     </div>

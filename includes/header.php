@@ -38,7 +38,7 @@
 
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <?php if ($_SESSION['user_role'] === 'admin'): ?>
-                        <li><a href="admin/admin_products.php" style="color: #ffcb05;"><i class="fas fa-tools"></i> ADMIN</a></li>
+                        <li><a href="admin/adminProducts.php" style="color: #ffcb05;"><i class="fas fa-tools"></i> ADMIN</a></li>
                     <?php endif; ?>
                     <li><a href="deconnexion.php"><i class="fas fa-sign-out-alt"></i> DÉCONNEXION</a></li>
                 <?php else: ?>
