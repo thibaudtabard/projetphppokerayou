@@ -40,6 +40,12 @@ $products = $stmt->fetchAll();
             <a href="../index.php" class="back-link"><i class="fas fa-arrow-left"></i> Retour au portail</a>
         </div>
 
+        <div class="admin-users-link">
+            <a href="admin_edit_user.php" class="btn-users" style="background: #3498db; color: white; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; transition: 0.3s;">
+                <i class="fas fa-users"></i> GÉRER LES UTILISATEURS
+            </a>
+        </div>
+
         <div style="text-align: right; margin-bottom: 20px;">
             <a href="admin_add.php" class="btn btn-add"><i class="fas fa-plus"></i> NOUVEAU PRODUIT</a>
         </div>
