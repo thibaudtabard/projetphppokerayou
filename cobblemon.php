@@ -42,7 +42,7 @@ include 'includes/header.php';
                 <form action="catalogue-cobblemon.php" method="POST" class="add-to-cart-form">
                     <input type="hidden" name="add_id" value="<?= $id ?>">
                     <input type="number" name="quantity" value="1" min="1" max="99" class="qty-input-mc">
-                    <button type="submit" class="btn-primary">ADOPTER</button>
+                    <button type="submit" class="btn-primary">PRENDRE</button>
                 </form>
             </div>
         <?php endforeach; ?>

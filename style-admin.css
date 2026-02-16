@@ -239,3 +239,96 @@ body {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.admin-container {
+    width: 90%;
+    margin: 30px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.user-table th, 
+.user-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.user-table th {
+    background: #ffcb05;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.user-table tr:hover {
+    background-color: #f9f9f9; 
+}
+
+.role-badge {
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+.admin-badge {
+    background: #f39c12;
+    color: white;
+}
+
+.user-badge {
+    background: #3498db;
+    color: white;
+}
+
+.btn-del {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.btn-del:hover {
+    color: #c0392b;
+    text-decoration: underline;
+}
+
+.msg {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success {
+    background: #2ecc71;
+    color: white;
+    border-left: 5px solid #27ae60;
+}
+
+.error {
+    background: #e74c3c;
+    color: white;
+    border-left: 5px solid #c0392b;
+}
+
+.btn-users, .btn-add {
+    transition: transform 0.2s ease;
+}
+
+.btn-users:hover, .btn-add:hover {
+    transform: translateY(-2px); 
+}
