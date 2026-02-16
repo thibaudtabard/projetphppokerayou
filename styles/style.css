@@ -1,0 +1,729 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+/* --- VARIABLES DE COULEURS --- */
+:root {
+    --col-electric: #ffcb05; 
+    --col-fire: #ff603b; 
+    --col-grass: #4eff5a; 
+    --col-water: #3b9cff; 
+    --col-ghost: #b37eff;
+    --col-normal: #A8A878; 
+    --col-dragon: #7038F8; 
+    --col-psy: #F85888;
+}
+
+/*  BASE & RÉINITIALISATION  */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    border-radius: 0 !important; 
+}
+
+body {
+    background-color: #2a2a2a;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/fond.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;
+    color: #fff; 
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, .price, button, nav a, .logo-main, .logo-sub { 
+    font-family: 'Press Start 2P', cursive; 
+    text-transform: uppercase; 
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+/* --- HEADER --- */
+header { 
+    background: rgba(0,0,0,0.7); 
+    border-bottom: 4px solid #444; 
+    padding: 30px 0; 
+    margin-bottom: 50px; 
+}
+
+.header-content { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.logo-main { 
+    font-size: 2.8rem; 
+    color: #e0e0e0; 
+    text-shadow: 6px 6px 0px #000; 
+    margin-bottom: 10px; 
+    text-align: center; 
+    line-height: 1.2; 
+}
+
+.logo-sub { 
+    font-size: 1.5rem; 
+    background: linear-gradient(180deg, #ff99cc 0%, #66b3ff 100%); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent; 
+    filter: drop-shadow(4px 4px 0px #000); 
+    margin-bottom: 10px; 
+    text-align: center; 
+}
+
+nav ul { 
+    list-style: none; 
+    display: flex; 
+    gap: 20px; 
+    background: #222; 
+    padding: 15px; 
+    border: 3px solid #555; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+}
+
+nav a { 
+    text-decoration: none; 
+    color: #fff; 
+    font-size: 0.8rem; 
+    padding: 10px 15px; 
+    transition: 0.2s; 
+    border: 2px solid transparent; 
+}
+
+nav a:hover, nav a.active { 
+    background-color: #ff3b3b; 
+    border-color: #fff; 
+    box-shadow: 4px 4px 0 #000; 
+}
+
+/* --- HERO SECTION --- */
+.hero { 
+    text-align: center; 
+    margin-bottom: 50px; 
+    background-color: rgba(20,20,20,0.9); 
+    padding: 30px; 
+    border: 4px solid #fff; 
+    box-shadow: 0 10px 0 #000; 
+}
+
+.hero h2 { 
+    color: #ffcb05; 
+    text-shadow: 3px 3px 0 #000; 
+    font-size: 1.4rem; 
+    line-height: 1.5; 
+}
+
+/*  GRILLE PRODUITS & CARTES  */
+.product-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 30px; 
+    padding-bottom: 50px; 
+}
+
+.card { 
+    width: 280px; 
+    flex: 0 0 auto; 
+    position: relative; 
+    background-color: #1e1e1e; 
+    padding: 15px; 
+    border: 4px solid #333; 
+    text-align: center; 
+    box-shadow: 8px 8px 0 #000; 
+    transition: transform 0.2s; 
+}
+
+.card:hover { 
+    transform: translateY(-5px); 
+    border-color: #fff; 
+    box-shadow: 12px 12px 0 #000; 
+}
+
+.card h3 { 
+    font-size: 1rem; 
+    margin-bottom: 10px; 
+    text-shadow: 2px 2px 0 #000; 
+    color: #fff; 
+}
+
+.desc { 
+    font-size: 0.8rem; 
+    color: #aaa; 
+    margin-bottom: 15px; 
+    font-family: 'Roboto', sans-serif; 
+    min-height: 40px;
+}
+
+.price { 
+    font-size: 1.2rem; 
+    color: #ffcb05; 
+    margin-bottom: 15px; 
+    display: block; 
+    text-shadow: 2px 2px 0 #000; 
+}
+
+.card-image-real { 
+    width: 100%; 
+    height: 140px; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+    border: 4px solid #000; 
+    background-color: rgba(0,0,0,0.5); 
+    padding: 10px; 
+}
+
+/* --- BOUTONS --- */
+
+button, .btn-primary { 
+    width: 100%; 
+    padding: 15px; 
+    border: none; 
+    background-color: #444; 
+    color: #fff; 
+    cursor: pointer; 
+    box-shadow: 0 4px 0 #000; 
+    text-align: center; 
+    display: inline-block;
+}
+
+button:hover, .btn-primary:hover { 
+    background-color: #666; 
+    transform: translateY(2px); 
+}
+
+/*  TYPES DE POKÉMON (Bordures et Boutons)  */
+
+/* Électrik */
+.type-electric { border-color: var(--col-electric); } 
+.type-electric h3 { color: var(--col-electric); } 
+.type-electric .btn-primary { background: var(--col-electric); color: #000; }
+
+/* Feu */
+.type-fire { border-color: var(--col-fire); } 
+.type-fire h3 { color: var(--col-fire); } 
+.type-fire .btn-primary { background: var(--col-fire); }
+
+/* Plante */
+.type-grass { border-color: var(--col-grass); } 
+.type-grass h3 { color: var(--col-grass); } 
+.type-grass .btn-primary { background: var(--col-grass); }
+
+/* Eau */
+.type-water { border-color: var(--col-water); } 
+.type-water h3 { color: var(--col-water); } 
+.type-water .btn-primary { background: var(--col-water); }
+
+/* Spectre */
+.type-ghost { border-color: var(--col-ghost); } 
+.type-ghost h3 { color: var(--col-ghost); } 
+.type-ghost .btn-primary { background: var(--col-ghost); }
+
+/* Normal */
+.type-normal { border-color: var(--col-normal); } 
+.type-normal h3 { color: var(--col-normal); } 
+.type-normal .btn-primary { background: var(--col-normal); color: #000; }
+
+/* Dragon */
+.type-dragon { border-color: var(--col-dragon); } 
+.type-dragon h3 { color: var(--col-dragon); } 
+.type-dragon .btn-primary { background: var(--col-dragon); color: #fff; }
+
+/* Psy */
+.type-psy { border-color: var(--col-psy); } 
+.type-psy h3 { color: var(--col-psy); } 
+.type-psy .btn-primary { background: var(--col-psy); color: #000; }
+
+/*  FORMULAIRE & BADGES  */
+
+.add-to-cart-form { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 15px; 
+    align-items: center; 
+}
+
+.qty-input-mc { 
+    width: 70px; 
+    padding: 12px 5px; 
+    border: 4px solid #000; 
+    background: #222; 
+    color: #fff; 
+    text-align: center; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 0.8rem; 
+    outline: none; 
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.5); 
+}
+
+.qty-input-mc:focus { 
+    border-color: #ffcb05; 
+}
+
+.add-to-cart-form .btn-primary { 
+    margin-top: 0; 
+    flex-grow: 1; 
+    padding: 15px 10px; 
+}
+
+.badge-top-mc { 
+    position: absolute; 
+    top: -10px; 
+    left: -10px; 
+    background: #ffcb05; 
+    color: #000; 
+    padding: 10px; 
+    border: 4px solid #000; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 0.6rem; 
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.8); 
+    z-index: 5; 
+}
+
+/*  PANIER MINECRAFT  */
+.cart-container { 
+    background-color: rgba(30, 30, 30, 0.95); 
+    padding: 30px; 
+    border: 4px solid #fff; 
+    box-shadow: 10px 10px 0 #000; 
+}
+
+.cart-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px; 
+}
+
+.cart-table th { 
+    text-align: left; 
+    padding: 15px; 
+    border-bottom: 4px solid #555; 
+    color: #ffcb05; 
+    font-size: 0.7rem; 
+}
+
+.cart-table td { 
+    padding: 15px; 
+    border-bottom: 2px solid #333; 
+    font-family: 'Roboto', sans-serif; 
+}
+
+.cart-item-info { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 0.8rem; 
+}
+
+.cart-mini-img-real { 
+    width: 60px; 
+    height: 60px; 
+    object-fit: contain; 
+    border: 2px solid #000; 
+    background: #222; 
+    padding: 5px; 
+}
+
+.cart-total-section { 
+    text-align: right; 
+    margin-top: 20px; 
+    border-top: 4px solid #555; 
+    padding-top: 20px; 
+}
+
+.total-price { 
+    font-size: 1.5rem; 
+    color: #4eff5a; 
+    margin-bottom: 15px; 
+    text-shadow: 3px 3px 0 #000; 
+}
+
+.btn-checkout { 
+    background-color: #4eff5a; 
+    color: #000 !important; 
+    width: auto; 
+    padding: 15px 40px; 
+    border: 4px solid #000 !important; 
+    display: inline-block; 
+}
+
+.btn-checkout:hover { 
+    background-color: #63ff6e; 
+}
+
+/*  LE MULTIVERS : SUPER PORTAIL D'ACCUEIL (index.php)  */
+.portal-body {
+    margin: 0; 
+    padding: 0;
+    background: radial-gradient(circle at center, #1b1b3a 0%, #0a0a1a 100%) !important;
+    min-height: 100vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.stars-bg {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    background-image: radial-gradient(#ffffff 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.portal-container {
+    width: 100%; 
+    max-width: 1100px; 
+    text-align: center;
+    padding: 40px 20px; 
+    z-index: 1; 
+    position: relative;
+}
+
+.portal-header { 
+    margin-bottom: 60px; 
+    animation: fadeInDown 1s ease-out; 
+}
+
+.portal-title {
+    font-size: 4rem;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(90deg, #ff3b3b, #4eff5a);
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent;
+    text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    margin-bottom: 15px; 
+    letter-spacing: 2px;
+}
+
+.portal-subtitle { 
+    font-size: 1.2rem; 
+    color: #a0a0b5; 
+    text-transform: uppercase; 
+    letter-spacing: 5px; 
+}
+
+.portal-choices { 
+    display: flex; 
+    justify-content: center; 
+    gap: 60px; 
+    flex-wrap: wrap; 
+    margin-bottom: 60px; 
+}
+
+.portal-card {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    width: 340px; 
+    height: 450px; 
+    text-decoration: none; 
+    color: white;
+    position: relative; 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: rgba(20, 20, 35, 0.8);
+    backdrop-filter: blur(10px); 
+    overflow: hidden;
+}
+
+.portal-card:hover { 
+    transform: translateY(-15px) scale(1.05); 
+    z-index: 10; 
+}
+
+.card-content { 
+    position: relative; 
+    z-index: 2; 
+    padding: 40px; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+/*  GESTION DES IMAGES DU PORTAIL  */
+.portal-image {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 25px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s;
+    z-index: 3;
+}
+
+.portal-card:hover .portal-image { 
+    transform: scale(1.15) translateY(-10px); 
+}
+
+.btn-enter { 
+    margin-top: auto; 
+    padding: 15px 30px; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    transition: 0.3s; 
+    width: 80%; 
+}
+
+.font-modern { 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 900; 
+    letter-spacing: 2px; 
+}
+
+.font-pixel { 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 1.1rem; 
+    line-height: 1.5; 
+}
+
+/* THEME CLASSIQUE  */
+.card-classic { 
+    border-radius: 30px !important; 
+    border: 2px solid rgba(255, 59, 59, 0.3); 
+    box-shadow: 0 15px 35px rgba(255, 59, 59, 0.1); 
+}
+
+.card-classic .card-glow { 
+    position: absolute; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%; 
+    background: radial-gradient(circle, rgba(255,59,59,0.15) 0%, transparent 60%); 
+    opacity: 0; 
+    transition: 0.5s; 
+}
+
+.card-classic:hover .card-glow { 
+    opacity: 1; 
+}
+
+.card-classic:hover { 
+    border-color: #ff3b3b; 
+    box-shadow: 0 20px 50px rgba(255, 59, 59, 0.4); 
+}
+
+.card-classic .portal-image { 
+    filter: drop-shadow(0 10px 15px rgba(255, 59, 59, 0.5)); 
+}
+
+.card-classic:hover .portal-image { 
+    filter: drop-shadow(0 15px 25px rgba(255, 59, 59, 0.8)); 
+}
+
+.classic-btn { 
+    border-radius: 30px !important; 
+    background: transparent; 
+    border: 2px solid #ff3b3b; 
+    color: #ff3b3b; 
+}
+
+.card-classic:hover .classic-btn { 
+    background: #ff3b3b; 
+    color: white; 
+    box-shadow: 0 0 20px #ff3b3b;
+}
+
+/*  THEME COBBLEMON  */
+.card-minecraft { 
+    border-radius: 0 !important; 
+    border: 4px solid rgba(78, 255, 90, 0.3); 
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.5); 
+}
+
+.card-minecraft .card-glow { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: linear-gradient(45deg, transparent 40%, rgba(78,255,90,0.1) 50%, transparent 60%); 
+    background-size: 200% 200%; 
+    transition: 0.5s; 
+}
+
+.card-minecraft:hover .card-glow { 
+    animation: shine 2s infinite; 
+}
+
+.card-minecraft:hover { 
+    border-color: #4eff5a; 
+    box-shadow: 15px 15px 0 #000, 0 0 40px rgba(78, 255, 90, 0.3); 
+}
+
+.card-minecraft .portal-image { 
+    filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.7)); 
+}
+
+.card-minecraft:hover .portal-image { 
+    filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.9)); 
+}
+
+.mc-btn { 
+    border-radius: 0 !important; 
+    background: #222; 
+    border: 4px solid #4eff5a; 
+    color: #4eff5a; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 0.7rem; 
+}
+
+.card-minecraft:hover .mc-btn { 
+    background: #4eff5a; 
+    color: #000; 
+}
+
+/*  LOGIN PANEL  */
+
+.auth-panel { 
+    background: rgba(20, 20, 30, 0.6); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px !important; 
+    padding: 40px; 
+    max-width: 500px; 
+    margin: 0 auto; 
+    backdrop-filter: blur(15px); 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02); 
+    animation: fadeInUp 1s ease-out 0.3s both; 
+}
+
+.auth-panel h3 { 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 900; 
+    font-size: 1.2rem; 
+    color: #fff; 
+    margin-bottom: 30px; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+}
+
+.auth-panel h3 i { 
+    color: #00ffcc; 
+    margin-right: 10px; 
+}
+
+.input-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    margin-bottom: 25px; 
+}
+
+.auth-panel input { 
+    width: 100%; 
+    padding: 15px 20px; 
+    border-radius: 10px !important; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    background: rgba(0,0,0,0.5); 
+    color: white; 
+    font-size: 1rem; 
+    transition: 0.3s; 
+    outline: none; 
+}
+
+.auth-panel input:focus { 
+    border-color: #00ffcc; 
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); 
+}
+
+.btn-login { 
+    width: 100%; 
+    padding: 15px; 
+    background: linear-gradient(90deg, #00ffcc, #00b3ff); 
+    border: none; 
+    border-radius: 10px !important; 
+    color: #000; 
+    font-weight: 900; 
+    font-size: 1rem; 
+    letter-spacing: 1px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+
+.btn-login:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 20px rgba(0, 255, 204, 0.3); 
+}
+
+.auth-links { 
+    margin-top: 20px; 
+    font-size: 0.9rem; 
+}
+
+.auth-links a { 
+    color: #888; 
+    text-decoration: none; 
+    transition: 0.3s; 
+}
+
+.auth-links a:hover { 
+    color: #fff; 
+}
+
+.msg-info { 
+    color: #00ffcc; 
+    margin-bottom: 20px; 
+    font-weight: bold; 
+    background: rgba(0, 255, 204, 0.1); 
+    padding: 10px; 
+    border-radius: 5px !important;
+}
+
+/*  ANIMATIONS  */
+@keyframes fadeInDown { 
+    from { 
+        opacity: 0; 
+        transform: translateY(-30px); 
+    } 
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+}
+
+@keyframes fadeInUp { 
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    } 
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+}
+
+@keyframes shine { 
+    0% { background-position: -200% center; } 
+    100% { background-position: 200% center; } 
+}
+
+/*  RESPONSIVE MOBILE  */
+
+@media (max-width: 768px) {
+    .portal-title { 
+        font-size: 2rem; 
+    }
+    .portal-choices { 
+        gap: 30px; 
+    }
+    .portal-card { 
+        width: 100%; 
+        max-width: 320px; 
+        height: 380px; 
+    }
+}

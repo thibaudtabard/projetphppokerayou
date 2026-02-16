@@ -1,5 +1,8 @@
 <?php
+// Fichier : inscription.php
 require 'db.php';
+
+$erreur = ""; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = htmlspecialchars($_POST['nom']);
@@ -12,17 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirm_password) {
         $erreur = "Les mots de passe ne correspondent pas.";
     } else {
-        // Vérifier si l'email existe déjà 
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         
         if ($stmt->fetch()) {
             $erreur = "Cet email est déjà utilisé.";
         } else {
-            // Hachage du mot de passe 
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            
-            // Insertion sécurisée 
             $insert = $pdo->prepare("INSERT INTO users (nom, email, password, role) VALUES (?, ?, ?, 'user')");
             $insert->execute([$nom, $email, $hash]);
             header('Location: connexion.php');
@@ -32,10 +31,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<form method="POST">
-    <input type="text" name="nom" placeholder="Votre nom" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Mot de passe" required>
-    <input type="password" name="confirm_password" placeholder="Répétez le mot de passe" required>
-    <button type="submit">S'inscrire</button>
-</form>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeRayou - Inscription</title>
+    <link rel="stylesheet" href="styles/style-inscription.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+
+    <div class="auth-wrapper">
+        <div class="auth-panel">
+            
+            <div class="auth-header">
+                <i class="fas fa-user-astronaut auth-icon"></i>
+                <h2>NOUVEAU DRESSEUR</h2>
+                <p>Rejoignez le réseau PokeRayou</p>
+            </div>
+
+            <?php if (!empty($erreur)): ?>
+                <div class="error-msg">
+                    <i class="fas fa-exclamation-triangle"></i> <?= $erreur ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST">
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="nom" placeholder="Votre nom" required autocomplete="off">
+                </div>
+
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" placeholder="Adresse Email" required autocomplete="off">
+                </div>
+
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+
+                <div class="input-container">
+                    <i class="fas fa-check-double"></i>
+                    <input type="password" name="confirm_password" placeholder="Répétez le mot de passe" required>
+                </div>
+
+                <button type="submit" class="btn-submit">CRÉER LE PROFIL</button>
+            </form>
+
+            <div class="auth-links">
+                <p>Déjà enregistré ? <a href="connexion.php">Accéder au réseau</a></p>
+                <p style="margin-top: 10px;"><a href="index.php" class="back-link"><i class="fas fa-arrow-left"></i> Retour au portail</a></p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
