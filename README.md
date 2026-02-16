@@ -78,6 +78,7 @@ ProjetSiteECPHP/
 1. **Clonez le projet** dans votre dossier `htdocs` (XAMPP)
    ```bash
    git clone <votre-repo> c:\xampp\htdocs\ProjetSiteECPHP
+   extraire le zi
    ```
 
 2. **Configurez la base de données** : Modifiez les paramètres dans [db.php](db.php)
