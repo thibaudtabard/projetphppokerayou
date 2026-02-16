@@ -2,13 +2,13 @@
 session_start();
 require '../db.php';
 
-// 1. SÉCURITÉ : Vérification Admin
+//  Vérification Admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../index.php');
     exit();
 }
 
-// 2. RÉCUPÉRATION DU PRODUIT
+//  RÉCUPÉRATION DU PRODUIT
 if (!isset($_GET['id'])) {
     header('Location: adminProducts.php');
     exit();
@@ -23,14 +23,14 @@ if (!$product) {
     die("Produit introuvable.");
 }
 
-// 3. TRAITEMENT DE LA MISE À JOUR
+//  TRAITEMENT DE LA MISE À JOUR
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = htmlspecialchars($_POST['nom']);
     $description = htmlspecialchars($_POST['description']);
     $prix = $_POST['prix'];
     $stock = $_POST['stock'];
     
-    // Gestion de l'image (si on en télécharge une nouvelle)
+    // image 
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], "../images/" . $image);

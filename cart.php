@@ -1,8 +1,8 @@
 <?php 
 session_start();
-require 'db.php'; // On utilise la BDD et non plus l'include static
+require 'db.php';
 
-// Sécurité : Redirection si pas connecté
+// Redirection si pas connecté
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?error=auth");
     exit();
