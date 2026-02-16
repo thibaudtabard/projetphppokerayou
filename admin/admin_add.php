@@ -2,7 +2,7 @@
 session_start();
 require '../db.php';
 
-// Vérification Admin
+// SÉCURITÉ : Vérification Admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../index.php');
     exit();
@@ -14,15 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prix = $_POST['prix'];
     $stock = $_POST['stock'];
     
-    $image = "default.png";
+    // Gestion de l'image
+    $image = "default.png"; // Image par défaut
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
+        // Assure-toi que le dossier ../images/ existe !
         move_uploaded_file($_FILES['image']['tmp_name'], "../images/" . $image);
     }
 
+    // Insertion en base de données
     $stmt = $pdo->prepare("INSERT INTO items (nom, description, prix, stock, image) VALUES (?, ?, ?, ?, ?)");
     $stmt->execute([$nom, $description, $prix, $stock, $image]);
 
+    // Redirection vers la liste
     header('Location: adminProducts.php?success=add');
     exit();
 }
@@ -33,49 +37,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un produit - Admin</title>
-    <link rel="stylesheet" href="../style-admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
+<body style="background: #222; color: white; font-family: sans-serif;">
 
-<div class="container">
-    <div class="admin-panel admin-panel-sm">
-        <h2><i class="fas fa-plus-circle" style="color: #ffcb05;"></i> Ajouter un produit</h2>
+<div class="container" style="max-width: 600px; margin: 50px auto; background: #333; padding: 20px; border-radius: 10px;">
+    <h2><i class="fas fa-plus-circle"></i> Ajouter un nouveau produit</h2>
+    <hr>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <label>Nom du produit :</label><br>
+        <input type="text" name="nom" placeholder="Pikachu" required style="width:100%; margin-bottom:15px; padding: 8px;">
+
+        <label>Description :</label><br>
+        <textarea name="description" rows="4" placeholder="Description du produit..." style="width:100%; margin-bottom:15px; padding: 8px;"></textarea>
+
+        <label>Prix :</label><br>
+        <input type="number" step="0.01" name="prix" placeholder="0.00" required style="width:100%; margin-bottom:15px; padding: 8px;">
+
+        <label>Stock initial :</label><br>
+        <input type="number" name="stock" placeholder="10" required style="width:100%; margin-bottom:15px; padding: 8px;">
+
+        <label>Image du produit :</label><br>
+        <input type="file" name="image" required style="width:100%; margin-bottom:15px;">
+
+        <button type="submit" style="background: #ffcb05; color: black; padding: 12px; border: none; cursor: pointer; font-weight: bold; width: 100%; border-radius: 5px;">
+            AJOUTER AU CATALOGUE
+        </button>
         
-        <form method="POST" enctype="multipart/form-data">
-            
-            <div class="form-group">
-                <label>Nom du produit :</label>
-                <input type="text" name="nom" placeholder="Ex: Pikachu" required>
-            </div>
-
-            <div class="form-group">
-                <label>Description :</label>
-                <textarea name="description" rows="4" placeholder="Description du produit..." required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Prix (€) :</label>
-                <input type="number" step="0.01" name="prix" placeholder="0.00" required>
-            </div>
-
-            <div class="form-group">
-                <label>Stock initial :</label>
-                <input type="number" name="stock" placeholder="10" required>
-            </div>
-
-            <div class="form-group">
-                <label>Image du produit :</label>
-                <input type="file" name="image" required>
-            </div>
-
-            <button type="submit" class="btn btn-submit">AJOUTER AU CATALOGUE</button>
-            
-            <p style="text-align: center; margin-top: 20px;">
-                <a href="adminProducts.php" class="back-link">Annuler et retour</a>
-            </p>
-        </form>
-    </div>
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="adminProducts.php" style="color: #ccc;">Annuler et retour</a>
+        </p>
+    </form>
 </div>
 
 </body>

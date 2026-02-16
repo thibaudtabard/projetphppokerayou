@@ -47,7 +47,7 @@ include 'includes/header.php';
         <form action="" method="POST">
             <input type="hidden" name="add_id" value="<?= $p['id'] ?>">
             <input type="number" name="quantity" value="1" min="1">
-            <button type="submit">ADOPTER</button>
+            <button type="submit">PRENDRE</button>
         </form>
     </div>
 <?php endforeach; ?>
