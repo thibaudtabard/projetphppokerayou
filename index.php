@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
 
         <div class="portal-choices">
             
-            <a href="classic.php" class="portal-card card-classic">
+            <a href="cobblemon.php" class="portal-card card-classic">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <img src="images/pokeball.png" alt="Poké Ball" class="portal-image">
