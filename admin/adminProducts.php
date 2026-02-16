@@ -2,7 +2,7 @@
 session_start();
 require '../db.php'; 
 
-// SÉCURITÉ : Vérification Admin
+//  Vérification Admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../index.php'); 
     exit();
