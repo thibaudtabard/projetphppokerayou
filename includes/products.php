@@ -27,10 +27,10 @@ $products = [
         'image' => 'masterball.png'
     ],
     5 => [
-        'name' => 'Soini Ball', 
+        'name' => 'Soin Ball', 
         'price' => 300, 
         'desc' => 'Soigne le Pokémon capturé.', 
-        'image' => 'soiniball.png'
+        'image' => 'soinball.png'
     ],
     6 => [
         'name' => 'Filet Ball', 

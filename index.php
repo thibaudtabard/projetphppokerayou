@@ -1,8 +1,26 @@
 <?php
 session_start();
+require 'db.php'; // On appelle la connexion à la BDD
+
 $message = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $message = "Accès réseau autorisé. Bienvenue Dresseur !";
+
+// LOGIQUE DE CONNEXION
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
+    $email = $_POST['email']; // Utilise l'email comme identifiant
+    $password = $_POST['password'];
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_nom'] = $user['nom'];
+        $_SESSION['user_role'] = $user['role'];
+        $message = "Accès réseau autorisé. Bienvenue Dresseur " . htmlspecialchars($user['nom']) . " !";
+    } else {
+        $message = "Identifiants incorrects. Accès refusé.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -32,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <img src="images/pokeball.png" alt="Poké Ball" class="portal-image">
-                    
                     <h2 class="font-modern">POKÉSHOP</h2>
                     <p class="font-modern desc-text">L'expérience Classique</p>
                     <span class="btn-enter classic-btn">ENTRER</span>
@@ -43,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <img src="images/384.png" alt="Cobblemon" class="portal-image">
-                    
                     <h2 class="font-pixel">COBBLEMON</h2>
                     <p class="font-pixel desc-text" style="font-size: 0.6rem; color: #aaa; margin-top: 15px;">Le monde Cubique</p>
                     <span class="btn-enter mc-btn">JOUER</span>
@@ -56,20 +72,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3><i class="fas fa-id-card"></i> CARTE DRESSEUR</h3>
             
             <?php if(!empty($message)): ?>
-                <p class="msg-info"><?php echo $message; ?></p>
+                <p class="msg-info" style="color: #ffcb05; margin-bottom: 15px;"><?php echo $message; ?></p>
             <?php endif; ?>
 
-            <form method="POST" action="">
-                <div class="input-group">
-                    <input type="text" name="pseudo" placeholder="Identifiant" required>
-                    <input type="password" name="password" placeholder="Mot de passe" required>
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <div class="user-logged">
+                    <p>Dresseur : <strong><?= htmlspecialchars($_SESSION['user_nom']) ?></strong></p>
+                    <p>Rang : <strong><?= strtoupper($_SESSION['user_role']) ?></strong></p>
+                    
+                    <div class="auth-links" style="margin-top: 20px;">
+                        <?php if($_SESSION['user_role'] === 'admin'): ?>
+                            <a href="admin/adminProducts.php" style="color: #ffcb05;"><i class="fas fa-tools"></i> Accès Admin</a> |
+                        <?php endif; ?>
+                        <a href="deconnexion.php" style="color: #ff4444;"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
                 </div>
-                <button type="submit" class="btn-login">CONNEXION AU RÉSEAU</button>
-            </form>
-            
-            <div class="auth-links">
-                <a href="#">Nouvel arrivant ? Créer un profil</a>
-            </div>
+
+            <?php else: ?>
+                <form method="POST" action="">
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Email (Identifiant)" required>
+                        <input type="password" name="password" placeholder="Mot de passe" required>
+                    </div>
+                    <button type="submit" name="login_submit" class="btn-login">CONNEXION AU RÉSEAU</button>
+                </form>
+                
+                <div class="auth-links">
+                    <a href="inscription.php">Nouvel arrivant ? Créer un profil</a>
+                </div>
+            <?php endif; ?>
+            <?php if(isset($_GET['error']) && $_GET['error'] == 'auth'): ?>
+    <p style="color: #ff4444; text-align: center; font-weight: bold;">
+        Veuillez vous connecter pour accéder à votre inventaire.
+    </p>
+<?php endif; ?>
         </div>
 
     </div>

@@ -1,7 +1,14 @@
 <?php 
 session_start();
-include 'includes/products.php';
+require 'db.php';
 
+// Redirection si pas connecté
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php?error=auth");
+    exit();
+}
+
+// Logique pour retirer un objet
 if(isset($_GET['remove'])) {
     $id = $_GET['remove'];
     if(isset($_SESSION['cart'][$id])) {
@@ -12,67 +19,45 @@ if(isset($_GET['remove'])) {
 }
 
 $total_price = 0;
+$cart_items = [];
+
+// Récupération des infos produits depuis la BDD pour les IDs dans le panier
+if(!empty($_SESSION['cart'])) {
+    $ids = array_keys($_SESSION['cart']);
+    $placeholders = str_repeat('?,', count($ids) - 1) . '?';
+    $stmt = $pdo->prepare("SELECT * FROM items WHERE id IN ($placeholders)");
+    $stmt->execute($ids);
+    $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 include 'includes/header-classic.php'; 
 ?>
 
 <main class="container">
     <section class="hero">
-        <h2>🛒 Votre Panier</h2>
-        <p>Validez vos achats avant de repartir en chasse.</p>
+        <h2> Votre Panier Classic</h2>
     </section>
 
     <div class="cart-container">
-        <?php if(empty($_SESSION['cart'])): ?>
-            <div style="text-align: center; padding: 40px 0;">
-                <p style="color: #888; font-size: 1.2rem;">Votre sac est vide pour le moment.</p>
-                <a href="catalogue-clasic.php" class="btn-add" style="width: 250px; margin: 30px auto 0;">Retourner au catalogue</a>
-            </div>
+        <?php if(empty($cart_items)): ?>
+            <p>Votre sac est vide.</p>
         <?php else: ?>
             <table class="cart-table">
-                <thead>
+                <?php foreach($cart_items as $p): 
+                    $quantity = $_SESSION['cart'][$p['id']];
+                    $sous_total = $p['prix'] * $quantity;
+                    $total_price += $sous_total;
+                ?>
                     <tr>
-                        <th>Produit</th>
-                        <th>Prix Unitaire</th>
-                        <th>Quantité</th>
-                        <th>Sous-Total</th>
-                        <th>Action</th>
+                        <td><?= htmlspecialchars($p['nom']) ?></td>
+                        <td><?= number_format($p['prix'], 2) ?> €</td>
+                        <td>x <?= $quantity ?></td>
+                        <td><?= number_format($sous_total, 2) ?> €</td>
+                        <td><a href="?remove=<?= $p['id'] ?>">Retirer</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($_SESSION['cart'] as $id => $quantity): ?>
-                        <?php 
-                            if(!isset($products[$id])) {
-                                unset($_SESSION['cart'][$id]);
-                                continue;
-                            }
-                            
-                            $p = $products[$id];
-                            $sous_total = $p['price'] * $quantity;
-                            $total_price += $sous_total;
-                        ?>
-                        <tr>
-                            <td>
-                                <div class="cart-item-info">
-                                    <img src="images/<?= $p['image'] ?>" alt="<?= $p['name'] ?>" class="cart-mini-img-real">
-                                    <span style="font-weight: bold;"><?= $p['name'] ?></span>
-                                </div>
-                            </td>
-                            <td><?= $p['price'] ?> €</td>
-                            <td><span style="background: #333; padding: 5px 15px; border-radius: 15px;">x <?= $quantity ?></span></td>
-                            <td style="color: #ff3b3b; font-weight: bold;"><?= $sous_total ?> €</td>
-                            <td><a href="?remove=<?= $id ?>" style="color: #ff3b3b; text-decoration: none;">Retirer</a></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
+                <?php endforeach; ?>
             </table>
-
-            <div class="cart-total-section">
-                <p style="color: #888; text-transform: uppercase; font-size: 0.9rem;">Total de la commande :</p>
-                <div class="total-price"><?= $total_price ?> €</div>
-                <button class="btn-checkout">VALIDER LA COMMANDE</button>
-            </div>
+            <div class="total-price">Total : <?= number_format($total_price, 2) ?> €</div>
         <?php endif; ?>
     </div>
 </main>
-</body>
-</html>

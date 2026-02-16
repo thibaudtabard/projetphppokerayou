@@ -16,14 +16,13 @@
         <div class="logo">
             <h1>🔴 PokeShop</h1>
         </div>
-        <nav>
+<nav>
             <ul>
                 <li><a href="index.php" class="btn-back">⬅ Portail</a></li>
                 <li><a href="classic.php">Accueil (Top 3)</a></li>
                 <li><a href="catalogue-clasic.php">Tout le Catalogue</a></li>
                 
                 <?php 
-                    // Affiche le nombre d'articles dans le panier
                     $cart_count = 0;
                     if(isset($_SESSION['cart'])) {
                         foreach($_SESSION['cart'] as $qty) {
@@ -37,7 +36,16 @@
                         <?= ($cart_count > 0) ? "($cart_count)" : "" ?>
                     </a>
                 </li>
-            </ul>
+
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if ($_SESSION['user_role'] === 'admin'): ?>
+                        <li><a href="admin/adminProducts.php" style="color: #ffcc00;">Admin</a></li>
+                    <?php endif; ?>
+                    <li><a href="deconnexion.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                <?php else: ?>
+                    <li><a href="connexion.php">Connexion</a></li>
+                <?php endif; ?>
+                </ul>
         </nav>
     </div>
 </header>
