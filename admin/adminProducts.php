@@ -27,7 +27,7 @@ $products = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Admin - PokeRayou</title>
-    <link rel="stylesheet" href="../style.css"> 
+    <link rel="stylesheet" href="styles/style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .admin-table { width: 95%; margin: 20px auto; border-collapse: collapse; background: white; color: black; border-radius: 8px; overflow: hidden; }

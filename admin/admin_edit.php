@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifier un produit - Admin</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body style="background: #222; color: white; font-family: sans-serif;">
 

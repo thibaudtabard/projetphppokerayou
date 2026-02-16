@@ -1,20 +1,19 @@
 <?php 
 session_start();
 
-// 1. SÉCURITÉ : Redirige vers l'index si le dresseur n'est pas connecté
+//  SÉCURITÉ : Redirige vers l'index si le dresseur n'est pas connecté
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?error=auth");
     exit();
 }
 
-require 'db.php'; // Connexion à dbsiteecommercey
+require 'db.php';
 
-// 2. RÉCUPÉRATION DES PRODUITS DEPUIS LA BDD
-// On récupère tout le catalogue pour l'afficher
+//  RÉCUPÉRATION DES PRODUITS DEPUIS LA BDD
 $stmt = $pdo->query("SELECT * FROM items ORDER BY nom ASC");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// 3. LOGIQUE D'AJOUT AU PANIER
+// LOGIQUE D'AJOUT AU PANIER
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_id'])) {
     $id = (int)$_POST['add_id'];
     $qty = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
@@ -26,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_id'])) {
     $check->execute([$id]);
     
     if($check->fetch()) { 
-        // Initialisation du panier "Classic"
+        // Initialisation du panier 
         if(!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
