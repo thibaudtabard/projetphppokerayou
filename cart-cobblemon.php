@@ -89,7 +89,7 @@ include 'includes/header.php';
                 <p style="color: #aaa; font-family: 'Press Start 2P'; font-size: 0.8rem; margin-bottom: 10px;">TOTAL À PAYER :</p>
                 <div class="total-price"><?= number_format($total_price, 2) ?> €</div>
                 
-                <button class="btn-checkout" onclick="alert('Commande validée !);">VALIDER L'ADOPTION</button>
+                <button class="btn-checkout" onclick="alert('Commande validée !);">VALIDER LA COMMANDE</button>
             </div>
         <?php endif; ?>
     </div>

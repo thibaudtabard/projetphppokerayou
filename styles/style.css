@@ -22,7 +22,7 @@
 
 body {
     background-color: #2a2a2a;
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/fond.png'); 
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/fond.png'); 
     background-size: cover; 
     background-position: center; 
     background-attachment: fixed;
